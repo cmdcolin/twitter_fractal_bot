@@ -31,7 +31,10 @@ ctx.fillStyle = 'white'
 drawCanvas(ctx, width, height, minR, maxR, minX, maxX, vertical, M, N)
 const out = fs.createWriteStream('test.png')
 const stream = canvas.createPNGStream()
-
+fs.writeFileSync(
+  'test.json',
+  JSON.stringify({ minX, maxX, minR, maxR }, null, 2),
+)
 //@ts-ignore
 stream.pipe(out)
 out.on('finish', () => console.log('The PNG file was created.'))
