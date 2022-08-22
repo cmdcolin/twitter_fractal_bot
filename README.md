@@ -29,3 +29,7 @@ Figure showing where to get the API key+API secret (box 1) and access token+acce
 Run `yarn post` to make a new post to twitter with a random Figure
 
 Run `yarn gen` to just make a new random image
+
+## Other
+
+My first twitter bot!

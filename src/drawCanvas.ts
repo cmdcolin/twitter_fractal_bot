@@ -1,15 +1,15 @@
 // split vertical and horizontal drawing, avoid branch in tight loop (superstitious)
 export default function drawCanvas(
-  ctx,
-  width,
-  height,
-  minR,
-  maxR,
-  minX,
-  maxX,
-  vertical,
-  M,
-  N,
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  minR: number,
+  maxR: number,
+  minX: number,
+  maxX: number,
+  vertical: boolean,
+  M: number,
+  N: number,
 ) {
   if (vertical) {
     drawCanvasVertical(ctx, width, height, minR, maxR, minX, maxX, M, N)
@@ -20,7 +20,17 @@ export default function drawCanvas(
 
 // attempts to draw N points given the params, with a limit of trying M times
 // (avoid infinite loop in empty spaces, etc)
-function drawCanvasHoriz(ctx, width, height, minR, maxR, minX, maxX, M, N) {
+function drawCanvasHoriz(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  minR: number,
+  maxR: number,
+  minX: number,
+  maxX: number,
+  M: number,
+  N: number,
+) {
   const rstep = (maxR - minR) / width
   const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
   for (let curr = 0; curr < width; curr++) {
@@ -47,7 +57,17 @@ function drawCanvasHoriz(ctx, width, height, minR, maxR, minX, maxX, M, N) {
 
 // attempts to draw N points given the params, with a limit of trying M times
 // (avoid infinite loop in empty spaces, etc)
-function drawCanvasVertical(ctx, width, height, minR, maxR, minX, maxX, M, N) {
+function drawCanvasVertical(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  minR: number,
+  maxR: number,
+  minX: number,
+  maxX: number,
+  M: number,
+  N: number,
+) {
   const rstep = (maxR - minR) / width
   const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
   for (let curr = 0; curr < width; curr++) {
