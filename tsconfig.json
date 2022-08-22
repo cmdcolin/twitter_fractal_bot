@@ -1,11 +1,12 @@
 {
   "include": ["src"],
   "compilerOptions": {
+    "target": "esnext",
     "outDir": "dist",
     "types": ["node"],
     "lib": ["dom", "esnext"],
-    "declaration": true,
     "moduleResolution": "node",
+    "declaration": true,
     "sourceMap": true,
     "strict": true,
     "noImplicitReturns": true,
