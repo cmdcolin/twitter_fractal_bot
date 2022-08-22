@@ -14,6 +14,8 @@
     "@types/oauth": "^0.9.1"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepost": "yarn build",
+    "post": "node dist/index.js && convert -resize 40% test.png test.resized.png && node dist/bot.js"
   }
 }
