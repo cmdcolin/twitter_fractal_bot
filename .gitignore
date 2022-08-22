@@ -1,5 +1,6 @@
 node_modules
 dist
-*.png
+test.png
+test.resized.png
 .env
 test.json

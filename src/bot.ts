@@ -19,8 +19,8 @@ async function mfetch(url: string, params: RequestInit) {
 function getAuth(oauth: OAuth.OAuth, url: string) {
   return oauth.authHeader(
     url,
-    process.env.TOKEN as string,
-    process.env.TOKEN_SECRET as string,
+    process.env.ACCESS_TOKEN as string,
+    process.env.ACCESS_TOKEN_SECRET as string,
     'post',
   )
 }

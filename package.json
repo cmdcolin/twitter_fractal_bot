@@ -15,7 +15,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepost": "yarn build",
-    "post": "node dist/index.js && convert -resize 40% test.png test.resized.png && node dist/bot.js"
+    "pregen": "yarn build",
+    "gen": "node dist/index.js && convert -resize 40% test.png test.resized.png",
+    "prepost": "yarn gen",
+    "post": "node dist/bot.js"
   }
 }
