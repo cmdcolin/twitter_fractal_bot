@@ -2,6 +2,8 @@
 
 Posts images of fractals to twitter at https://twitter.com/chaosbot80
 
+![](img/2.jpeg)
+
 ## How to make your own bot with this code
 
 Create a .env file with contents like this
