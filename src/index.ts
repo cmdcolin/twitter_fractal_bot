@@ -28,8 +28,8 @@ const maxX = minX + (1 - minX) * Math.random()
 const vertical = false
 const canvas = createCanvas(width, height)
 const ctx = canvas.getContext('2d')
-const M = 500000
-const N = 20000
+const M = 100000
+const N = 10000
 ctx.fillStyle = getDarkColor()
 ctx.fillRect(0, 0, width, height)
 ctx.fillStyle = '#fff2'
