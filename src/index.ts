@@ -12,15 +12,12 @@ function getDarkColor() {
 
 const width = 5000
 const height = 3500
-// const minX = 0
-// const maxX = 1
-// const minR = 2
-// const maxR = 4
-// const minX = 0.75 + Math.random() * 0.25
+
+// select somewhere to the right of the fractal (x-axis)
 const minR = 3.5 + Math.random() * 0.5
 const maxR = minR + (4 - minR) * Math.random()
 
-// use warmup to zoom in on an area of the fractal
+// use logistic formula warmup to find a point that is within the fractal
 const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
 let p = Math.random()
 for (let i = 0; i < Math.max(warmup, 10000); i++) {
@@ -31,11 +28,11 @@ const maxX = minX + (1 - minX) * Math.random()
 const vertical = false
 const canvas = createCanvas(width, height)
 const ctx = canvas.getContext('2d')
-const M = 50000
-const N = 5000
+const M = 500000
+const N = 20000
 ctx.fillStyle = getDarkColor()
 ctx.fillRect(0, 0, width, height)
-ctx.fillStyle = 'white'
+ctx.fillStyle = '#fff2'
 drawCanvas(ctx, width, height, minR, maxR, minX, maxX, vertical, M, N)
 const out = fs.createWriteStream('test.png')
 const stream = canvas.createPNGStream()
