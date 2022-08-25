@@ -2,15 +2,13 @@ import fs from 'fs'
 import { createCanvas } from 'canvas'
 import drawCanvas from './drawCanvas.js'
 
+const r = () => 200 + Math.floor(Math.random() * 80)
+const s = () => Math.floor(Math.random() * 55)
+const opacity = 0.5 * Math.pow(Math.random(), 2)
+
 function getDarkColor() {
-  var color = '#'
-  for (var i = 0; i < 6; i++) {
-    color += Math.floor(Math.random() * 5)
-  }
-  return color
+  return `rgb(${s()},${s()},${s()})`
 }
-const r = () => 200 + Math.floor(Math.random() * 55)
-const opacity = 0.5 * Math.random() * Math.random()
 function getLightColor() {
   return `rgba(${r()},${r()},${r()},${opacity})`
 }
@@ -18,9 +16,12 @@ function getLightColor() {
 const width = 5000
 const height = 3500
 
+const iterx = Math.random() * Math.random() * 4 + 1
+const itery = Math.random() * Math.random() * 4 + 1
+
 // select somewhere to the right of the fractal (x-axis)
 const minR = 3.5 + Math.random() * 0.5
-const maxR = minR + (4 - minR) * Math.random() * Math.random()
+const maxR = minR + (4 - minR) * Math.pow(Math.random(), iterx)
 
 // use logistic formula warmup to find a point that is within the fractal
 const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
@@ -29,7 +30,7 @@ for (let i = 0; i < Math.max(warmup, 10000); i++) {
   p = minR * p * (1 - p)
 }
 const minX = p
-const maxX = minX + (1 - minX) * Math.random() * Math.random()
+const maxX = minX + (1 - minX) * Math.pow(Math.random(), itery)
 const vert = Math.random() > 0.75
 const canvas = createCanvas(width, height)
 const ctx = canvas.getContext('2d')
