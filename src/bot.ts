@@ -67,7 +67,9 @@ dotenv.config()
       },
       body: JSON.stringify({
         media: { media_ids: [r.media_id_string] },
-        text: `min_x=${minX},max_x=${maxX},min_r=${minR},max_r=${maxR}`,
+        text: `min_x=${minX},max_x=${maxX},min_r=${minR},max_r=${maxR},max_x-min_x=${
+          maxX - minX
+        },max_r-min_r=${maxR - minR}`,
       }),
       method: 'post',
     })
