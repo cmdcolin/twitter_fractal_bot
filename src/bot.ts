@@ -4,7 +4,17 @@ import OAuth from 'oauth'
 import fetch, { RequestInit } from 'node-fetch'
 import { FormData, File } from 'formdata-node'
 
+dotenv.config()
+
+function p(r: number) {
+  return r.toPrecision(5)
+}
+
 const form = new FormData()
+form.set(
+  'media',
+  new File([fs.readFileSync('test.resized.png')], 'test.resized.png'),
+)
 
 async function mfetch(url: string, params: RequestInit) {
   const response = await fetch(url, params)
@@ -25,13 +35,27 @@ function getAuth(oauth: OAuth.OAuth, url: string) {
   )
 }
 
-const { minX, maxX, minR, maxR } = JSON.parse(
+const { vert, bg, fg, minX, maxX, minR, maxR, N, M } = JSON.parse(
   fs.readFileSync('test.json', 'utf8'),
-)
-const file = new File([fs.readFileSync('test.resized.png')], 'test.resized.png')
-form.set('media', file)
+) as {
+  minX: number
+  maxX: number
+  minR: number
+  maxR: number
+  vert: boolean
+  bg: string
+  fg: string
+  N: number
+  M: number
+  opacity: number
+}
 
-dotenv.config()
+const url =
+  `https://cmdcolin.github.io/logistic_chaos_map/?wasm=false&minX=${minX}&maxX=${maxX}&minR=${minR}&maxR=${maxR}&N=${N}&M=${M}&animate=true&vert=${vert}&scaleFactor=2&bg=${bg}&fg=${fg}`
+    .replace(/\(/g, '%28')
+    .replace(/\)/g, '%29')
+    .replace(/\#/g, '%23')
+
 ;(async () => {
   try {
     const client = new OAuth.OAuth(
@@ -57,7 +81,6 @@ dotenv.config()
       //@ts-ignore
       body: form,
     })
-
     const result = await mfetch(tweetEndpoint, {
       headers: {
         Authorization: getAuth(client, tweetEndpoint),
@@ -67,9 +90,9 @@ dotenv.config()
       },
       body: JSON.stringify({
         media: { media_ids: [r.media_id_string] },
-        text: `min_x=${minX},max_x=${maxX},min_r=${minR},max_r=${maxR},max_x-min_x=${
-          maxX - minX
-        },max_r-min_r=${maxR - minR}`,
+        text: `min_x=${p(minX)},max_x=${p(maxX)},min_r=${p(minR)},max_r=${p(
+          maxR,
+        )},diff_x=${p(maxX - minX)},diff_r=${p(maxR - minR)} ${url}`,
       }),
       method: 'post',
     })

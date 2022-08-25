@@ -10,8 +10,9 @@ function getDarkColor() {
   return color
 }
 const r = () => 200 + Math.floor(Math.random() * 55)
+const opacity = 0.5 * Math.random() * Math.random()
 function getLightColor() {
-  return `rgba(${r()},${r()},${r()},${Math.random() * Math.random()})`
+  return `rgba(${r()},${r()},${r()},${opacity})`
 }
 
 const width = 5000
@@ -29,20 +30,22 @@ for (let i = 0; i < Math.max(warmup, 10000); i++) {
 }
 const minX = p
 const maxX = minX + (1 - minX) * Math.random() * Math.random()
-const vertical = false
+const vert = Math.random() > 0.75
 const canvas = createCanvas(width, height)
 const ctx = canvas.getContext('2d')
 const M = 100000
 const N = 10000
-ctx.fillStyle = getDarkColor()
+const bg = getDarkColor()
+const fg = getLightColor()
+ctx.fillStyle = bg
 ctx.fillRect(0, 0, width, height)
-ctx.fillStyle = getLightColor()
-drawCanvas(ctx, width, height, minR, maxR, minX, maxX, vertical, M, N)
+ctx.fillStyle = fg
+drawCanvas(ctx, width, height, minR, maxR, minX, maxX, vert, M, N)
 const out = fs.createWriteStream('test.png')
 const stream = canvas.createPNGStream()
 fs.writeFileSync(
   'test.json',
-  JSON.stringify({ minX, maxX, minR, maxR }, null, 2),
+  JSON.stringify({ minX, maxX, minR, maxR, N, M, fg, bg, vert }, null, 2),
 )
 //@ts-ignore
 stream.pipe(out)
