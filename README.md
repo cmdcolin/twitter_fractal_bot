@@ -33,6 +33,9 @@ https://github.com/twitterdev/twitter-api-typescript-sdk
 
 ![](img/devpanel.png)
 
+See this blogpost for a couple added details
+https://cmdcolin.github.io/posts/2022-08-26-twitterbot
+
 Figure showing where to get the API key+API secret (box 1) and access token+access secret (box 2)
 
 ## Usage
