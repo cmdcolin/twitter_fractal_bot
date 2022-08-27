@@ -3,15 +3,9 @@
   "compilerOptions": {
     "target": "esnext",
     "outDir": "dist",
-    "types": ["node"],
-    "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
     "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
-    "allowJs": true
+    "esModuleInterop": true
   }
 }
