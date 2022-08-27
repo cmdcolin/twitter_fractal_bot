@@ -58,12 +58,6 @@ const url =
 
 ;(async () => {
   try {
-    console.log(
-      !!process.env.API_KEY,
-      !!process.env.API_SECRET,
-      !!process.env.ACCESS_TOKEN,
-      !!process.env.ACCESS_TOKEN_SECRET,
-    )
     const client = new OAuth.OAuth(
       'https://api.twitter.com/oauth/request_token',
       'https://api.twitter.com/oauth/access_token',
