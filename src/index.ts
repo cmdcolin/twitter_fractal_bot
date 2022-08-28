@@ -2,6 +2,50 @@ import fs from 'fs'
 import { createCanvas } from 'canvas'
 import drawCanvas from './drawCanvas.js'
 
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+
+const argv = yargs(hideBin(process.argv))
+  .option('min_x', {
+    describe: 'min_x value',
+    default: 0,
+  })
+  .option('max_x', {
+    describe: 'max_x value',
+    default: 1,
+  })
+  .option('min_r', {
+    describe: 'min_r value',
+    default: 2,
+  })
+  .option('max_r', {
+    describe: 'max_r value',
+    default: 4,
+  })
+  .option('N', {
+    describe: 'N number of points in visible region to attempt to plot',
+    default: 10000,
+  })
+  .option('M', {
+    describe: 'M is the max iterations when trying to draw the N points',
+    default: 200000,
+  })
+  .option('width', {
+    default: 5000,
+  })
+  .option('height', {
+    default: 5000,
+  })
+  .option('fg', {
+    describe: 'foreground color',
+  })
+  .option('bg', {
+    describe: 'background color',
+  })
+  .help().argv
+
+console.log({ argv })
+
 const r = () => 200 + Math.floor(Math.random() * 80)
 const s = () => Math.floor(Math.random() * 55)
 const opacity = 0.4 * Math.pow(Math.random(), 2)
