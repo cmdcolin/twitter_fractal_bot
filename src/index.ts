@@ -16,8 +16,8 @@ function getLightColor() {
 const width = 5000
 const height = 3500
 
-const iterx = Math.random() * Math.random() * 4 + 1
-const itery = Math.random() * Math.random() * 4 + 1
+const iterx = Math.random() * 5 + 1
+const itery = Math.random() * 5 + 1
 
 // select somewhere to the right of the fractal (x-axis)
 const minR = 3.5 + Math.random() * 0.5
@@ -34,7 +34,7 @@ const maxX = minX + (1 - minX) * Math.pow(Math.random(), itery)
 const vert = Math.random() > 0.75
 const canvas = createCanvas(width, height)
 const ctx = canvas.getContext('2d')
-const M = 100000
+const M = 200000
 const N = 10000
 const bg = getDarkColor()
 const fg = getLightColor()
