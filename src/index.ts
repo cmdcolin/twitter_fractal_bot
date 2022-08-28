@@ -4,7 +4,7 @@ import drawCanvas from './drawCanvas.js'
 
 const r = () => 200 + Math.floor(Math.random() * 80)
 const s = () => Math.floor(Math.random() * 55)
-const opacity = 0.4 * Math.pow(Math.random(), 2)
+const opacity = 0.6 * Math.pow(Math.random(), 2)
 
 function getDarkColor() {
   return `rgb(${s()},${s()},${s()})`
