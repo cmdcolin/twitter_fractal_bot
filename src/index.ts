@@ -4,7 +4,7 @@ import drawCanvas from './drawCanvas.js'
 
 const r = () => 200 + Math.floor(Math.random() * 80)
 const s = () => Math.floor(Math.random() * 55)
-const opacity = 0.6 * Math.pow(Math.random(), 2)
+const opacity = Math.random() * Math.random()
 
 function getDarkColor() {
   return `rgb(${s()},${s()},${s()})`
@@ -17,7 +17,7 @@ const width = 5000
 const height = 3500
 
 const iterx = Math.random() * 5 + 1
-const itery = Math.random() * 5 + 1
+const itery = iterx + (Math.random() * 2 - 1)
 
 // select somewhere to the right of the fractal (x-axis)
 const minR = 3.5 + Math.random() * 0.5
