@@ -12,9 +12,9 @@ export default function drawCanvas(
   N: number,
 ) {
   if (vertical) {
-    drawCanvasVertical(ctx, width, height, minR, maxR, minX, maxX, M, N)
+    return drawCanvasVertical(ctx, width, height, minR, maxR, minX, maxX, M, N)
   } else {
-    drawCanvasHoriz(ctx, width, height, minR, maxR, minX, maxX, M, N)
+    return drawCanvasHoriz(ctx, width, height, minR, maxR, minX, maxX, M, N)
   }
 }
 
@@ -33,6 +33,7 @@ function drawCanvasHoriz(
 ) {
   const rstep = (maxR - minR) / width
   const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
+  let totalPointsDrawn = 0
   for (let curr = 0; curr < width; curr++) {
     const r = curr * rstep + minR
     let p = Math.random()
@@ -49,10 +50,12 @@ function drawCanvasHoriz(
       if (y > 0 && y < height) {
         ctx.fillRect(x, y, 1, 1)
         pointsDrawn++
+        totalPointsDrawn++
       }
       p = r * p * (1 - p)
     }
   }
+  return totalPointsDrawn
 }
 
 // attempts to draw N points given the params, with a limit of trying M times
@@ -70,6 +73,7 @@ function drawCanvasVertical(
 ) {
   const rstep = (maxR - minR) / width
   const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
+  let totalPointsDrawn = 0
   for (let curr = 0; curr < width; curr++) {
     const r = curr * rstep + minR
     let p = Math.random()
@@ -86,8 +90,10 @@ function drawCanvasVertical(
       if (x > 0 && x < width) {
         ctx.fillRect(x, y, 1, 1)
         pointsDrawn++
+        totalPointsDrawn++
       }
       p = r * p * (1 - p)
     }
   }
+  return totalPointsDrawn
 }
