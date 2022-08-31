@@ -17,7 +17,7 @@ const width = 5000
 const height = 3500
 
 function makeRandomDrawing() {
-  const iterx = Math.random() * 5 + 1
+  const iterx = Math.random() * 6 + 1
   const itery = iterx + (Math.random() * 2 - 1)
 
   // select somewhere to the right of the fractal (x-axis)
