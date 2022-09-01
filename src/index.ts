@@ -4,7 +4,8 @@ import drawCanvas from './drawCanvas.js'
 
 const r = () => 200 + Math.floor(Math.random() * 80)
 const s = () => Math.floor(Math.random() * 55)
-const opacity = Math.random() * Math.random()
+const opacity = 0.5 * Math.random()
+console.log({ opacity })
 
 function getDarkColor() {
   return `rgb(${s()},${s()},${s()})`
@@ -48,9 +49,11 @@ function makeRandomDrawing() {
 
 let attempts = 0
 let params = makeRandomDrawing()
+console.log({ params })
 while (attempts++ < 10 && params.pct < 0.6) {
   console.log("Didn't draw enough points, retrying attempt " + attempts)
   params = makeRandomDrawing()
+  console.log({ params })
 }
 
 const out = fs.createWriteStream('test.png')

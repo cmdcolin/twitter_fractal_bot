@@ -98,7 +98,7 @@ function drawCanvasVertical(
       if (x > 0 && x < width) {
         ctx.fillRect(x, y, 1, 1)
         pointsDrawn++
-        if (colPointsDrawn === 50) {
+        if (colPointsDrawn === 4000) {
           total++
         }
         colPointsDrawn++
