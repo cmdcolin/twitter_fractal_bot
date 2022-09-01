@@ -48,8 +48,8 @@ function makeRandomDrawing() {
 
 let attempts = 0
 let params = makeRandomDrawing()
-while (attempts < 10 && params.pct > 0.6) {
-  console.log("Didn't draw enough points, retrying attempt " + attempts++)
+while (attempts++ < 10 && params.pct < 0.6) {
+  console.log("Didn't draw enough points, retrying attempt " + attempts)
   params = makeRandomDrawing()
 }
 
