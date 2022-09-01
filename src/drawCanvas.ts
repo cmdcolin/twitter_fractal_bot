@@ -33,13 +33,14 @@ function drawCanvasHoriz(
 ) {
   const rstep = (maxR - minR) / width
   const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
-  let totalPointsDrawn = 0
+  let total = 0
   for (let curr = 0; curr < width; curr++) {
     const r = curr * rstep + minR
     let p = Math.random()
     for (let i = 0; i < Math.max(warmup, 10000); i++) {
       p = r * p * (1 - p)
     }
+    let colPointsDrawn = 0
     for (
       let pointsDrawn = 0, tries = 0;
       pointsDrawn < N && tries < M;
@@ -50,12 +51,18 @@ function drawCanvasHoriz(
       if (y > 0 && y < height) {
         ctx.fillRect(x, y, 1, 1)
         pointsDrawn++
-        totalPointsDrawn++
+
+        if (colPointsDrawn === 50) {
+          total++
+        }
+        colPointsDrawn++
       }
       p = r * p * (1 - p)
     }
   }
-  return totalPointsDrawn
+
+  // keeps track of columns that have had things drawn in them, to try to get "interesting" screenshots
+  return total / width
 }
 
 // attempts to draw N points given the params, with a limit of trying M times
@@ -73,13 +80,14 @@ function drawCanvasVertical(
 ) {
   const rstep = (maxR - minR) / width
   const warmup = Math.pow(1.5, Math.log(1 / (maxR - minR))) * 1000
-  let totalPointsDrawn = 0
+  let total = 0
   for (let curr = 0; curr < width; curr++) {
     const r = curr * rstep + minR
     let p = Math.random()
     for (let i = 0; i < Math.max(warmup, 10000); i++) {
       p = r * p * (1 - p)
     }
+    let colPointsDrawn = 0
     for (
       let pointsDrawn = 0, tries = 0;
       pointsDrawn < N && tries < M;
@@ -90,10 +98,14 @@ function drawCanvasVertical(
       if (x > 0 && x < width) {
         ctx.fillRect(x, y, 1, 1)
         pointsDrawn++
-        totalPointsDrawn++
+        if (colPointsDrawn === 50) {
+          total++
+        }
+        colPointsDrawn++
       }
       p = r * p * (1 - p)
     }
   }
-  return totalPointsDrawn
+  // keeps track of columns that have had things drawn in them, to try to get "interesting" screenshots
+  return total / width
 }

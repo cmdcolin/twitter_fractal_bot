@@ -42,31 +42,20 @@ function makeRandomDrawing() {
   ctx.fillStyle = bg
   ctx.fillRect(0, 0, width, height)
   ctx.fillStyle = fg
-  const pointsDrawn = drawCanvas(
-    ctx,
-    width,
-    height,
-    minR,
-    maxR,
-    minX,
-    maxX,
-    vert,
-    M,
-    N,
-  )
-  return { canvas, pointsDrawn, minX, maxX, minR, maxR, N, M, fg, bg, vert }
+  const pct = drawCanvas(ctx, width, height, minR, maxR, minX, maxX, vert, M, N)
+  return { canvas, pct, minX, maxX, minR, maxR, N, M, fg, bg, vert }
 }
 
 let attempts = 0
 let params = makeRandomDrawing()
-while (attempts < 10 && params.pointsDrawn < 500000) {
+while (attempts < 10 && params.pct > 0.6) {
   console.log("Didn't draw enough points, retrying attempt " + attempts++)
   params = makeRandomDrawing()
 }
 
 const out = fs.createWriteStream('test.png')
 const stream = params.canvas.createPNGStream()
-const { canvas, pointsDrawn, ...rest } = params
+const { canvas, pct, ...rest } = params
 fs.writeFileSync('test.json', JSON.stringify(rest, null, 2))
 stream.pipe(out)
 out.on('finish', () => console.log('The PNG file was created.'))
