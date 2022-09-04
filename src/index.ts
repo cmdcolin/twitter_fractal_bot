@@ -36,7 +36,7 @@ function makeRandomDrawing() {
   const vert = Math.random() > 0.75
   const canvas = createCanvas(width, height)
   const ctx = canvas.getContext('2d')
-  const M = 200000
+  const M = 1000000
   const N = 10000
   const bg = getDarkColor()
   const fg = getLightColor()
