@@ -5,7 +5,6 @@ import drawCanvas from './drawCanvas.js'
 const r = () => 200 + Math.floor(Math.random() * 80)
 const s = () => Math.floor(Math.random() * 55)
 const opacity = 0.5 * Math.random()
-console.log({ opacity })
 
 function getDarkColor() {
   return `rgb(${s()},${s()},${s()})`
@@ -44,16 +43,48 @@ function makeRandomDrawing() {
   ctx.fillRect(0, 0, width, height)
   ctx.fillStyle = fg
   const pct = drawCanvas(ctx, width, height, minR, maxR, minX, maxX, vert, M, N)
+
+  let lw = 400
+  let lh = 300
+  if (vert) {
+    ;[lw, lh] = [lh, lw]
+  }
+  ctx.fillStyle = bg
+  ctx.fillRect(0, 0, lw, lh)
+  ctx.fillStyle = fg
+
+  drawCanvas(ctx, lw, lh, 2, 4, 0, 1, vert, 5000, 2000)
+  ctx.lineWidth = 3
+  ctx.strokeStyle = 'red'
+  if (!vert) {
+    ctx.strokeRect(
+      ((minR - 2) / 2) * lw,
+      minX * lh,
+      ((maxR - minR) / 2) * lw,
+      (maxX - minX) * lh,
+    )
+
+    ctx.strokeStyle = fg
+    ctx.strokeRect(0, 0, lw, lh)
+  } else {
+    ctx.strokeRect(
+      minX * lw,
+      ((minR - 2) / 2) * lh,
+      (maxX - minX) * lw,
+      ((maxR - minR) / 2) * lh,
+    )
+
+    ctx.strokeStyle = fg
+    ctx.strokeRect(0, 0, lw, lh)
+  }
   return { canvas, pct, minX, maxX, minR, maxR, N, M, fg, bg, vert }
 }
 
 let attempts = 0
 let params = makeRandomDrawing()
-console.log({ params })
 while (attempts++ < 10 && params.pct < 0.6) {
   console.log("Didn't draw enough points, retrying attempt " + attempts)
   params = makeRandomDrawing()
-  console.log({ params })
 }
 
 const out = fs.createWriteStream('test.png')

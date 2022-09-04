@@ -37,7 +37,6 @@ function drawCanvasHoriz(
   for (let curr = 0; curr < width; curr++) {
     const r = curr * rstep + minR
     let p = Math.random()
-    console.log(curr + '/' + width)
     for (let i = 0; i < Math.max(warmup, 10000); i++) {
       p = r * p * (1 - p)
     }
@@ -85,7 +84,6 @@ function drawCanvasVertical(
   for (let curr = 0; curr < width; curr++) {
     const r = curr * rstep + minR
     let p = Math.random()
-    console.log(curr + '/' + width)
     for (let i = 0; i < Math.max(warmup, 10000); i++) {
       p = r * p * (1 - p)
     }
