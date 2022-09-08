@@ -54,7 +54,7 @@ function makeRandomDrawing() {
   ctx.fillStyle = fg
 
   drawCanvas(ctx, lw, lh, 2, 4, 0, 1, vert, 5000, 2000)
-  ctx.lineWidth = 3
+  ctx.lineWidth = 6
   ctx.strokeStyle = 'red'
   if (!vert) {
     ctx.strokeRect(
